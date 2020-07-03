@@ -1,3 +1,4 @@
+/*
 package com.zup.crud.testeConfig;
 
 import com.zup.crud.entities.User;
@@ -23,3 +24,4 @@ public class TestConfig implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(u1));
     }
 }
+*/

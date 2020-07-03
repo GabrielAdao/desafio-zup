@@ -7,26 +7,21 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
-    private int idade;
+    private Integer idade;
     private String CPF;
     private String email;
-    private int telefone;
+    private Integer telefone;
     private String endereco;
 
-
-    public User(){
-
-    }
-
-    public User(Long id, String nome, int idade, String CPF, String email, int telefone, String endereco) {
+    public User(Long id, String nome, Integer idade, String CPF, String email, Integer telefone, String endereco) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -35,6 +30,10 @@ public class User implements Serializable {
         this.telefone = telefone;
         this.endereco = endereco;
     }
+
+    public User() {
+    }
+
 
     public Long getId() {
         return id;
@@ -52,11 +51,11 @@ public class User implements Serializable {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public Integer getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(Integer idade) {
         this.idade = idade;
     }
 
@@ -77,11 +76,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getTelefone() {
+    public Integer getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(Integer telefone) {
         this.telefone = telefone;
     }
 
