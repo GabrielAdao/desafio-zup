@@ -7,11 +7,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Table(name = "tabUser")
+public class User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     private String nome;
@@ -20,6 +19,9 @@ public class User implements Serializable {
     private String email;
     private Integer telefone;
     private String endereco;
+
+    public User() {
+    }
 
     public User(Long id, String nome, Integer idade, String CPF, String email, Integer telefone, String endereco) {
         this.id = id;
@@ -31,10 +33,9 @@ public class User implements Serializable {
         this.endereco = endereco;
     }
 
-    public User() {
-    }
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -43,51 +44,47 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "nome", nullable = false)
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    @Column(name = "idade", nullable = false)
     public Integer getIdade() {
         return idade;
     }
-
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
 
+    @Column(name = "CPF", nullable = false)
     public String getCPF() {
         return CPF;
     }
-
-
     public void setCPF(String CPF) {
         this.CPF = CPF;
     }
-
+    @Column(name = "email", nullable = false)
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
+    @Column(name = "telefone", nullable = false)
     public Integer getTelefone() {
         return telefone;
     }
-
     public void setTelefone(Integer telefone) {
         this.telefone = telefone;
     }
-
+    @Column(name = "endereco", nullable = false)
     public String getEndereco() {
         return endereco;
     }
-
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }

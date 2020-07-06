@@ -1,7 +1,7 @@
 package com.zup.crud;
 
 import com.zup.crud.entities.User;
-import com.zup.crud.dao.UserDAO;
+import com.zup.crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class CrudApplication implements ApplicationRunner {
 
 	@Autowired
-	private UserDAO userDAO;
+	private UserService userService;
 	Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -119,11 +119,11 @@ public class CrudApplication implements ApplicationRunner {
 		User user = new User(null, name, age , cpf, email, phone, adress);
 
 
-		userDAO.insertUser(user);
+		userService.insert(user);
 	}
 
 	private void listAllUsers(){
-		List<User> listUsers = userDAO.findAll();
+		List<User> listUsers = userService.findAll();
 
 		System.out.println("Lista de todos os usuarios:");
 		listUsers.forEach(user -> {
@@ -133,7 +133,7 @@ public class CrudApplication implements ApplicationRunner {
 	}
 
 	public void findUserByCPF(){
-		List<User> listUsers = userDAO.findAll();
+		List<User> listUsers = userService.findAll();
 
 		System.out.println("Digite um CPF para busca: ");
 		String searchCPF = sc.next();
@@ -151,7 +151,7 @@ public class CrudApplication implements ApplicationRunner {
 
 	public void updateUserByCPF(){
 
-		List<User> listUsers = userDAO.findAll();
+		List<User> listUsers = userService.findAll();
 		System.out.println("Digite um CPF para busca: ");
 		String searchCPF = sc.next();
 
@@ -197,7 +197,7 @@ public class CrudApplication implements ApplicationRunner {
 					user.setTelefone(phone);
 					user.setEndereco(adress);
 
-					userDAO.executeUpdateUser(user);
+					userService.update(user);
 
 					System.out.println("Nome: " + user.getNome() + " | Idade: " + user.getIdade() + " | CPF: "
 							+ user.getCPF() + " | Email: " + user.getEmail() + " | Telefone: " + user.getTelefone() + " | Endereço: " + user.getEndereco());
@@ -217,28 +217,28 @@ public class CrudApplication implements ApplicationRunner {
 							String name = sc.nextLine();
 							user.setNome(name);
 							System.out.println("Alterado!");
-							userDAO.executeUpdateUser(user);
+							userService.update(user);
 							break;
 						case "2":
 							System.out.println("Digite uma nova idade:");
 							int age = sc.nextInt();
 							user.setIdade(age);
 							System.out.println("Alterado!");
-							userDAO.executeUpdateUser(user);
+							userService.update(user);
 							break;
 						case "3":
 							System.out.println("Digite um novo email:");
 							String email = sc.next();
 							user.setEmail(email);
 							System.out.println("Alterado!");
-							userDAO.executeUpdateUser(user);
+							userService.update(user);
 							break;
 						case "4":
 							System.out.println("Digite um novo telefone");
 							int phone = sc.nextInt();
 							user.setTelefone(phone);
 							System.out.println("Alterado!");
-							userDAO.executeUpdateUser(user);
+							userService.update(user);
 							break;
 						case "5":
 							System.out.println("Digite um novo Endereço:");
@@ -246,7 +246,7 @@ public class CrudApplication implements ApplicationRunner {
 							String adress = sc.nextLine();
 							user.setEndereco(adress);
 							System.out.println("Alterado!");
-							userDAO.executeUpdateUser(user);
+							userService.update(user);
 							break;
 						case "6":
 							System.out.println("Saindo...");
@@ -264,7 +264,7 @@ public class CrudApplication implements ApplicationRunner {
 	}
 
 	public void deleteUserByCPF(){
-		List<User> listUsers = userDAO.findAll();
+		List<User> listUsers = userService.findAll();
 
 		System.out.println("Digite um CPF para busca: ");
 		String searchCPF = sc.next();
@@ -272,7 +272,7 @@ public class CrudApplication implements ApplicationRunner {
 		listUsers.forEach(user -> {
 			if (searchCPF.equals(user.getCPF())) {
 				System.out.println("Usuario com o CPF "+ user.getCPF() + " deletado");
-				userDAO.deleteUser(user);
+				userService.delete(user.getId());
 			}else{
 				System.out.println("CPF não encontrado!");
 			}
